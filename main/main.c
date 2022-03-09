@@ -345,7 +345,14 @@ static void task_handle_user_input(void *pvParameters){
             vTaskDelay(500 / portTICK_PERIOD_MS);
             print_menu();
         }
-
+        else if((strncmp("test_buzzer", input, strlen("test_buzzer"))==0) ||
+            (strncmp("TEST_BUZZER", input, strlen("TEST_BUZZER"))==0))
+        {
+            buzzeron((void *)true);
+            vTaskDelay(5000 / portTICK_PERIOD_MS);
+            print_menu();
+        }
+ 
         memset(input, 0x00, sizeof(input));
         vTaskDelay(200/portTICK_PERIOD_MS);
     }
@@ -357,6 +364,7 @@ static void print_menu(){
     printf("#########   MYPETGO TEST FW   ##################\n");
     printf("################################################\n");
     printf("Test LED       : please type \"test_led\"\n");
+    printf("Test BUZZER    : please type \"test_buzzer\"\n");
     printf("Test SENSOR    : please type \"test_sensor\"\n");
     printf("Test WIFI      : please type \"test_wifi\"\n");
     printf("Test Bluetooth : please type \"test_ble\"\n");
