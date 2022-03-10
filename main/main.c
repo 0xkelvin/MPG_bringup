@@ -347,9 +347,10 @@ static void task_handle_user_input(void *pvParameters){
         }
         else if((strncmp("test_buzzer", input, strlen("test_buzzer"))==0) ||
             (strncmp("TEST_BUZZER", input, strlen("TEST_BUZZER"))==0))
-        {
-            buzzeron((void *)true);
-            vTaskDelay(5000 / portTICK_PERIOD_MS);
+        {            
+            bool turn_on = true;        
+            xTaskCreate(buzzeron, "buzzeron", 2048, &turn_on, 12, NULL);
+            vTaskDelay(1000 / portTICK_PERIOD_MS);
             print_menu();
         }
  
